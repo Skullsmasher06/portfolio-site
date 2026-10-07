@@ -1,0 +1,566 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Grant Carmody | Mechanical Engineering</title>
+<meta name="description" content="Grant Carmody, mechanical engineering student at Auburn University. Projects, experience, and contact.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..900&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230C2340'/%3E%3Ccircle cx='16' cy='16' r='7' fill='none' stroke='%23E87722' stroke-width='3'/%3E%3C/svg%3E">
+<!--
+  CONTENT TO REPLACE before sharing widely:
+  - Project write-ups, experience entries, and skills are sample content.
+  - Email, LinkedIn, and résumé links are placeholders (search for "example").
+-->
+<style>
+  :root {
+    --film: #E6EAEE;
+    --film-deep: #DCE2E7;
+    --ink: #0C2340;
+    --graphite: #4A5562;
+    --construction: #AEB8C2;
+    --dim: #E87722;
+    --dim-text: #B35400; /* orange darkened for AA text contrast on film */
+
+    --step--1: 0.875rem;
+    --step-0: 1.0625rem;
+    --step-1: 1.375rem;
+    --step-2: 1.875rem;
+    --step-3: clamp(2.25rem, 5vw, 3.25rem);
+    --step-4: clamp(2.75rem, 11vw, 5.5rem);
+
+    --gutter: clamp(1rem, 4vw, 3rem);
+    --measure: 64ch;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--film);
+    color: var(--ink);
+    font-family: "Archivo", system-ui, sans-serif;
+    font-size: var(--step-0);
+    font-variation-settings: "wdth" 100;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  img, svg { display: block; max-width: 100%; }
+  a { color: inherit; }
+  :focus-visible { outline: 3px solid var(--dim); outline-offset: 3px; }
+
+  .wrap { width: min(72rem, 100%); margin-inline: auto; padding-inline: var(--gutter); }
+
+  /* ---------- Top bar ---------- */
+  .bar {
+    display: flex; justify-content: space-between; align-items: baseline; gap: 1rem;
+    padding-block: 1.25rem;
+    font-size: var(--step--1);
+    font-variation-settings: "wdth" 75;
+    font-weight: 500;
+  }
+  .bar nav { display: flex; gap: 1.25rem; flex-wrap: wrap; }
+  .bar a { text-decoration: none; }
+  .bar a:hover { text-decoration: underline; text-decoration-color: var(--dim); text-underline-offset: 4px; }
+
+  /* ---------- Hero ---------- */
+  .hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+    gap: clamp(1.5rem, 4vw, 4rem);
+    align-items: center;
+    padding-block: clamp(2rem, 7vw, 6rem) clamp(3rem, 8vw, 7rem);
+  }
+  .hero-text { container-type: inline-size; }
+  .hero h1 {
+    margin: 0;
+    font-size: var(--step-4);
+    font-size: min(5.5rem, 17.5cqi); /* "Carmody" always fits its column */
+    line-height: 0.9;
+    font-weight: 850;
+    font-variation-settings: "wdth" 125;
+    letter-spacing: -0.02em;
+  }
+  .hero h1 span { display: block; }
+  .hero .lede {
+    margin: 1.75rem 0 0;
+    max-width: 34ch;
+    font-size: var(--step-1);
+    line-height: 1.4;
+    color: var(--graphite);
+  }
+  .hero .actions { display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 2rem; }
+
+  .btn {
+    display: inline-block;
+    padding: 0.8rem 1.3rem;
+    border: 2px solid var(--ink);
+    border-radius: 2px;
+    font-weight: 650;
+    text-decoration: none;
+    font-size: var(--step--1);
+    letter-spacing: 0.01em;
+    transition: background-color .15s, color .15s;
+  }
+  .btn-solid { background: var(--ink); color: var(--film); }
+  .btn-solid:hover { background: transparent; color: var(--ink); }
+  .btn-line:hover { background: var(--ink); color: var(--film); }
+
+  /* Drawing */
+  .sheet { position: relative; margin: 0; }
+  .sheet svg { width: 100%; height: auto; overflow: visible; }
+  .sheet .obj { fill: none; stroke: var(--ink); stroke-width: 2.25; stroke-linejoin: round; }
+  .sheet .hidden { fill: none; stroke: var(--ink); stroke-width: 1.25; stroke-dasharray: 6 4; opacity: .7; }
+  .sheet .center { fill: none; stroke: var(--graphite); stroke-width: 1; stroke-dasharray: 18 4 3 4; opacity: .7; }
+  .sheet .dimline { fill: none; stroke: var(--dim); stroke-width: 1.25; }
+  .sheet .arrow { fill: var(--dim); }
+  .sheet text {
+    font-family: "Archivo", sans-serif;
+    font-variation-settings: "wdth" 75;
+    font-size: 13px;
+    font-weight: 600;
+    fill: var(--dim-text);
+  }
+  .sheet .note { fill: var(--graphite); font-weight: 500; }
+  .sheet figcaption {
+    margin-top: .75rem;
+    font-size: var(--step--1);
+    font-variation-settings: "wdth" 75;
+    color: var(--graphite);
+  }
+
+  /* One orchestrated load: outlines draw, then dimensions appear. */
+  @media (prefers-reduced-motion: no-preference) {
+    .sheet .obj {
+      stroke-dasharray: var(--len, 1200);
+      stroke-dashoffset: var(--len, 1200);
+      animation: draw 1.6s cubic-bezier(.6,.05,.3,1) forwards;
+    }
+    .sheet .obj.late { animation-delay: .4s; }
+    .sheet .hidden, .sheet .center {
+      opacity: 0;
+      animation: appear-faint .6s ease-out 1.4s forwards;
+    }
+    .sheet .dims {
+      opacity: 0;
+      animation: appear .6s ease-out 1.8s forwards;
+    }
+    @keyframes draw { to { stroke-dashoffset: 0; } }
+    @keyframes appear-faint { to { opacity: .7; } }
+    @keyframes appear { to { opacity: 1; } }
+  }
+
+  /* ---------- Sections ---------- */
+  section { padding-block: clamp(3rem, 8vw, 6rem); }
+  section + section { border-top: 1px solid var(--construction); }
+  .section-head { max-width: var(--measure); margin-bottom: clamp(2rem, 5vw, 3.5rem); }
+  h2 {
+    margin: 0;
+    font-size: var(--step-3);
+    line-height: 1;
+    font-weight: 800;
+    font-variation-settings: "wdth" 118;
+    letter-spacing: -0.015em;
+  }
+  .section-head p { margin: 1rem 0 0; color: var(--graphite); max-width: 52ch; }
+
+  /* About */
+  .about {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
+    gap: clamp(1.5rem, 5vw, 5rem);
+  }
+  .about-body { margin-top: 1.5rem; }
+  .about-body p { margin: 0 0 1em; max-width: var(--measure); }
+  .facts { margin: 0; display: grid; gap: 1.25rem; align-content: start; }
+  .facts div { border-left: 3px solid var(--dim); padding-left: 1rem; }
+  .facts dt { font-size: var(--step--1); color: var(--graphite); font-variation-settings: "wdth" 75; }
+  .facts dd { margin: .15rem 0 0; font-weight: 650; font-size: var(--step-1); line-height: 1.25; }
+
+  /* Projects */
+  .project {
+    display: grid;
+    grid-template-columns: minmax(0, 15rem) minmax(0, 1fr);
+    gap: clamp(1.25rem, 4vw, 3.5rem);
+    padding-block: clamp(2rem, 4vw, 3rem);
+  }
+  .project + .project { border-top: 1px dashed var(--construction); }
+  .project .plate {
+    background: var(--film-deep);
+    border-radius: 4px;
+    aspect-ratio: 4 / 3;
+    display: grid; place-items: center;
+    padding: 1.25rem;
+  }
+  .project .plate svg { width: 100%; height: 100%; }
+  .plate .o { fill: none; stroke: var(--ink); stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; }
+  .plate .d { fill: none; stroke: var(--dim); stroke-width: 1.25; }
+  .plate .c { fill: none; stroke: var(--graphite); stroke-width: 1; stroke-dasharray: 10 3 2 3; opacity: .7; }
+  .project h3 {
+    margin: 0;
+    font-size: var(--step-2);
+    line-height: 1.1;
+    font-weight: 750;
+    font-variation-settings: "wdth" 108;
+  }
+  .project .context { margin: .4rem 0 1rem; color: var(--graphite); font-size: var(--step--1); font-variation-settings: "wdth" 85; }
+  .project p { margin: 0 0 1rem; max-width: var(--measure); }
+  .project .points { margin: 0 0 1.25rem; padding-left: 1.1rem; max-width: var(--measure); }
+  .project .points li { margin-bottom: .35rem; }
+  .project .points li::marker { color: var(--dim); }
+  .tools { display: flex; flex-wrap: wrap; gap: .5rem; margin: 0; padding: 0; list-style: none; }
+  .tools li {
+    font-size: var(--step--1);
+    font-variation-settings: "wdth" 80;
+    font-weight: 550;
+    padding: .2rem .6rem;
+    border: 1px solid var(--construction);
+    border-radius: 2px;
+  }
+
+  /* Experience timeline */
+  .timeline { list-style: none; margin: 0; padding: 0; max-width: 52rem; }
+  .timeline li {
+    display: grid;
+    grid-template-columns: 10rem minmax(0, 1fr);
+    padding-bottom: 2.25rem;
+    position: relative;
+  }
+  .timeline li::before {
+    content: "";
+    position: absolute; left: 10rem; top: .6rem; bottom: -.6rem;
+    width: 1px; background: var(--construction);
+  }
+  .timeline li:last-child::before { display: none; }
+  .timeline time {
+    font-variation-settings: "wdth" 75;
+    font-weight: 600;
+    color: var(--dim-text);
+    font-size: var(--step--1);
+    padding-top: .2rem;
+  }
+  .timeline .entry { padding-left: 1.75rem; position: relative; }
+  .timeline .entry::before {
+    content: ""; position: absolute; left: -.35rem; top: .45rem;
+    width: .7rem; height: .7rem; border: 2px solid var(--dim); border-radius: 50%; background: var(--film);
+  }
+  .timeline h3 { margin: 0; font-size: var(--step-1); font-weight: 700; line-height: 1.25; }
+  .timeline .org { margin: .1rem 0 .5rem; color: var(--graphite); }
+  .timeline p { margin: 0; max-width: var(--measure); }
+
+  /* Skills */
+  .skills { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(1.5rem, 4vw, 3rem); }
+  .skills h3 {
+    margin: 0 0 .75rem;
+    font-size: var(--step-1);
+    font-weight: 700;
+    font-variation-settings: "wdth" 108;
+    padding-bottom: .5rem;
+    border-bottom: 2px solid var(--ink);
+  }
+  .skills ul { list-style: none; margin: 0; padding: 0; }
+  .skills li { padding-block: .4rem; border-bottom: 1px solid var(--construction); }
+
+  /* Contact */
+  section.contact { background: var(--ink); color: var(--film); border-top: 0; }
+  .contact h2 { color: var(--film); }
+  .contact p { color: var(--construction); max-width: 46ch; margin: 1rem 0 2rem; }
+  .contact .email {
+    display: inline-block;
+    font-size: clamp(1.5rem, 5.5vw, 3.75rem);
+    font-weight: 800;
+    font-variation-settings: "wdth" 115;
+    line-height: 1.1;
+    text-decoration: none;
+    border-bottom: 3px solid var(--dim);
+    overflow-wrap: anywhere;
+  }
+  .contact .email:hover { color: var(--dim); }
+  .contact .links { display: flex; gap: 1.5rem; flex-wrap: wrap; margin-top: 2.5rem; font-weight: 600; }
+  .contact .links a { text-underline-offset: 4px; text-decoration-color: var(--dim); }
+
+  footer {
+    background: var(--ink); color: var(--construction);
+    font-size: var(--step--1); font-variation-settings: "wdth" 75;
+    padding-block: 1.5rem 2rem;
+    border-top: 1px solid rgba(174, 184, 194, .25);
+  }
+
+  /* ---------- Responsive ---------- */
+  @media (max-width: 860px) {
+    .hero, .about, .skills, .project { grid-template-columns: minmax(0, 1fr); }
+    .project .plate { max-width: 20rem; }
+  }
+  @media (max-width: 600px) {
+    .bar nav a:not(:last-child) { display: none; }
+    .timeline li { grid-template-columns: minmax(0, 1fr); padding-left: 1.75rem; }
+    .timeline li::before { left: 0; top: .6rem; }
+    .timeline .entry { padding-left: 0; }
+    .timeline .entry::before { left: -2.1rem; top: -1.45rem; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+  }
+</style>
+</head>
+<body>
+
+<header class="wrap bar">
+  <span>Grant Carmody</span>
+  <nav aria-label="Sections">
+    <a href="#projects">Projects</a>
+    <a href="#experience">Experience</a>
+    <a href="#skills">Skills</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<main>
+  <div class="wrap hero">
+    <div class="hero-text">
+      <h1><span>Grant</span><span>Carmody</span></h1>
+      <p class="lede">Mechanical engineering student at Auburn University. I design parts, test them, and redesign them until the numbers agree.</p>
+      <div class="actions">
+        <a class="btn btn-solid" href="#projects">See my projects</a>
+        <a class="btn btn-line" href="#contact">Get in touch</a>
+      </div>
+    </div>
+
+    <figure class="sheet">
+      <svg viewBox="0 0 560 400" role="img" aria-label="Orthographic drawing of a machined L-bracket, front and side views, with dimensions">
+        <!-- Front view -->
+        <path class="obj" style="--len:1040" d="M60 80 H180 V240 H330 V320 H60 Z"/>
+        <circle class="obj" style="--len:120" cx="120" cy="150" r="18"/>
+        <circle class="obj" style="--len:120" cx="260" cy="280" r="18"/>
+        <!-- Side view -->
+        <path class="obj late" style="--len:880" d="M400 80 H520 V320 H400 Z M400 240 H520"/>
+        <!-- Hidden and center lines -->
+        <path class="hidden" d="M400 132 H520 M400 168 H520 M442 240 V320 M478 240 V320"/>
+        <path class="center" d="M92 150 H148 M120 122 V178 M232 280 H288 M260 252 V308 M390 150 H530 M460 70 V330"/>
+
+        <g class="dims">
+          <!-- overall width -->
+          <path class="dimline" d="M60 330 V364 M330 330 V364 M66 356 H324"/>
+          <path class="arrow" d="M60 356 l10 -4 v8 z M330 356 l-10 -4 v8 z"/>
+          <text x="195" y="350" text-anchor="middle">135.0</text>
+          <!-- overall height -->
+          <path class="dimline" d="M52 80 H34 M52 320 H34 M44 86 V314"/>
+          <path class="arrow" d="M44 80 l-4 10 h8 z M44 320 l-4 -10 h8 z"/>
+          <text x="38" y="200" text-anchor="middle" transform="rotate(-90 38 200)">120.0</text>
+          <!-- upright width -->
+          <path class="dimline" d="M60 72 V52 M180 72 V52 M66 60 H174"/>
+          <path class="arrow" d="M60 60 l10 -4 v8 z M180 60 l-10 -4 v8 z"/>
+          <text x="120" y="52" text-anchor="middle">60.0</text>
+          <!-- hole callout leader -->
+          <path class="dimline" d="M133 137 L200 104 H290"/>
+          <circle class="arrow" cx="133" cy="137" r="2.5"/>
+          <text x="204" y="98">2× Ø18.0 THRU</text>
+          <!-- base thickness -->
+          <path class="dimline" d="M338 240 H362 M338 320 H362 M354 246 V314"/>
+          <path class="arrow" d="M354 240 l-4 10 h8 z M354 320 l-4 -10 h8 z"/>
+          <text x="364" y="284">40.0</text>
+          <!-- side depth -->
+          <path class="dimline" d="M400 72 V52 M520 72 V52 M406 60 H514"/>
+          <path class="arrow" d="M400 60 l10 -4 v8 z M520 60 l-10 -4 v8 z"/>
+          <text x="460" y="52" text-anchor="middle">60.0</text>
+          <text class="note" x="460" y="352" text-anchor="middle">Side view</text>
+          <text class="note" x="195" y="388" text-anchor="middle">Front view</text>
+        </g>
+      </svg>
+      <figcaption>Mounting bracket, 6061-T6 aluminum. Dimensions in mm.</figcaption>
+    </figure>
+  </div>
+
+  <section id="about">
+    <div class="wrap about">
+      <dl class="facts">
+        <div><dt>Studying</dt><dd>B.S. Mechanical Engineering</dd></div>
+        <div><dt>School</dt><dd>Auburn University, Samuel Ginn College of Engineering</dd></div>
+        <div><dt>Looking for</dt><dd>Summer internship or co-op in design, manufacturing, or test</dd></div>
+      </dl>
+      <div>
+        <h2>About</h2>
+        <div class="about-body">
+          <p>I like problems you can hold in your hands. Most of my time outside class goes to building things: modeling them in CAD, running the analysis, and then finding out on the shop floor what the model missed.</p>
+          <p>I'm most interested in mechanical design and manufacturing, especially where the two meet. A part that looks good in SolidWorks still has to be machinable, inspectable, and affordable, and I enjoy working through those tradeoffs.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Projects</h2>
+        <p>Selected work from coursework, team projects, and my own builds.</p>
+      </div>
+
+      <article class="project">
+        <div class="plate" aria-hidden="true">
+          <svg viewBox="0 0 160 120">
+            <path class="o" d="M60 14 L100 14 L108 50 L100 106 L60 106 L52 50 Z"/>
+            <circle class="o" cx="80" cy="56" r="16"/>
+            <circle class="o" cx="80" cy="24" r="5"/><circle class="o" cx="80" cy="96" r="5"/>
+            <path class="c" d="M80 4 V116 M40 56 H120"/>
+            <path class="d" d="M112 14 H136 M112 106 H136 M130 18 V102"/>
+          </svg>
+        </div>
+        <div>
+          <h3>Suspension upright redesign</h3>
+          <p class="context">Team project</p>
+          <p>Redesigned a front suspension upright to cut weight without losing stiffness under cornering and braking loads.</p>
+          <ul class="points">
+            <li>Built load cases from vehicle data and ran static FEA on each design iteration</li>
+            <li>Used topology optimization to guide pocketing, then cleaned up the geometry for 3-axis machining</li>
+            <li>Reduced part mass while holding deflection under the target limit</li>
+          </ul>
+          <ul class="tools" aria-label="Tools used">
+            <li>SolidWorks</li><li>ANSYS Mechanical</li><li>GD&amp;T</li><li>CNC machining</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="project">
+        <div class="plate" aria-hidden="true">
+          <svg viewBox="0 0 160 120">
+            <rect class="o" x="20" y="34" width="120" height="52" rx="4"/>
+            <path class="o" d="M34 34 V86 M48 34 V86 M62 34 V86 M76 34 V86 M90 34 V86 M104 34 V86 M118 34 V86"/>
+            <path class="o" d="M8 50 H20 M8 70 H20 M140 50 H152 M140 70 H152"/>
+            <path class="d" d="M20 92 V108 M140 92 V108 M24 104 H136"/>
+          </svg>
+        </div>
+        <div>
+          <h3>Heat exchanger test rig</h3>
+          <p class="context">Thermal-fluids lab</p>
+          <p>Designed and ran an experiment comparing measured heat transfer in a finned-tube exchanger against textbook predictions.</p>
+          <ul class="points">
+            <li>Instrumented the rig with thermocouples and a flow meter, logged with a DAQ</li>
+            <li>Processed data and propagated uncertainty in MATLAB</li>
+            <li>Wrote the lab report explaining where and why the measurements departed from the model</li>
+          </ul>
+          <ul class="tools" aria-label="Tools used">
+            <li>MATLAB</li><li>LabVIEW</li><li>Uncertainty analysis</li><li>Technical writing</li>
+          </ul>
+        </div>
+      </article>
+
+      <article class="project">
+        <div class="plate" aria-hidden="true">
+          <svg viewBox="0 0 160 120">
+            <circle class="o" cx="56" cy="60" r="32"/>
+            <circle class="o" cx="56" cy="60" r="8"/>
+            <circle class="o" cx="114" cy="60" r="22"/>
+            <circle class="o" cx="114" cy="60" r="6"/>
+            <path class="c" d="M16 60 H144 M56 20 V100 M114 30 V90"/>
+            <path class="d" d="M56 100 V114 M114 90 V114 M60 110 H110"/>
+          </svg>
+        </div>
+        <div>
+          <h3>Two-stage gearbox</h3>
+          <p class="context">Machine design course</p>
+          <p>Sized gears, shafts, and bearings for a two-stage speed reducer from a given torque and life requirement.</p>
+          <ul class="points">
+            <li>Calculated gear stresses with AGMA methods and selected bearings from catalog life ratings</li>
+            <li>Checked shafts for fatigue at keyways and shoulders</li>
+            <li>Produced a full assembly model and a drawing package with tolerances</li>
+          </ul>
+          <ul class="tools" aria-label="Tools used">
+            <li>Fusion 360</li><li>Excel</li><li>Fatigue analysis</li><li>Engineering drawings</li>
+          </ul>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section id="experience">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Experience</h2>
+      </div>
+      <ol class="timeline">
+        <li>
+          <time>Summer 2026</time>
+          <div class="entry">
+            <h3>Manufacturing engineering intern</h3>
+            <p class="org">Company name, City, AL</p>
+            <p>Supported a production line by updating work instructions, tracking down scrap sources, and designing a simple fixture that cut setup time.</p>
+          </div>
+        </li>
+        <li>
+          <time>2025 to present</time>
+          <div class="entry">
+            <h3>Design team member</h3>
+            <p class="org">Student engineering team, Auburn University</p>
+            <p>Own the CAD and analysis for one subsystem, from concept sketches through machining and testing.</p>
+          </div>
+        </li>
+        <li>
+          <time>2024 to present</time>
+          <div class="entry">
+            <h3>B.S. Mechanical Engineering</h3>
+            <p class="org">Auburn University</p>
+            <p>Coursework in statics, dynamics, mechanics of materials, thermodynamics, fluids, heat transfer, and machine design.</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Skills</h2>
+      </div>
+      <div class="skills">
+        <div>
+          <h3>Design and CAD</h3>
+          <ul>
+            <li>SolidWorks</li>
+            <li>Fusion 360</li>
+            <li>GD&amp;T and drawing packages</li>
+            <li>Design for manufacturing</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Analysis</h3>
+          <ul>
+            <li>FEA in ANSYS</li>
+            <li>Hand calcs and fatigue checks</li>
+            <li>MATLAB and Python</li>
+            <li>Test planning and DAQ</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Shop</h3>
+          <ul>
+            <li>Manual mill and lathe</li>
+            <li>CNC setup and CAM</li>
+            <li>3D printing</li>
+            <li>MIG welding</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="contact">
+    <div class="wrap">
+      <h2>Let's talk</h2>
+      <p>I'm looking for internships and co-ops. Email is the fastest way to reach me.</p>
+      <a class="email" href="mailto:you@example.com">you@example.com</a>
+      <div class="links">
+        <a href="https://www.linkedin.com/in/example">LinkedIn</a>
+        <a href="resume.pdf">Résumé (PDF)</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">© 2026 Grant Carmody</div>
+</footer>
+
+</body>
+</html>
